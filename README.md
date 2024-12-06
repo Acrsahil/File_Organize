@@ -1,110 +1,80 @@
-## File Organizer using Python
+File Organizer
 
-This project automates the organization of files in the Downloads folder based on their file types or names. It provides two solutions:
+This project contains scripts that automate the organization of files in a specified directory. The scripts monitor file creation events and move files to appropriate folders based on their extensions or specific rules.
+1. Watchdog File Organizer
 
-    Real-Time File Monitoring using watchdog.
-    Batch File Processing using os and shutil.
+Description:
+This script uses the watchdog library to monitor a directory for new files and automatically moves them to predefined folders based on their file types (e.g., videos, images, documents).
+Features:
 
-Features
-1. Real-Time File Monitoring
+    Real-time monitoring of a directory for file changes.
+    Automatically organizes files into folders such as Videos, Music, Pictures, and Documents.
+    Customizable folder structure and file type rules.
 
-    Monitors the Downloads folder for newly added files.
-    Automatically moves files to predefined folders based on file extensions.
+Requirements:
 
-2. Batch File Processing
+    Python 3.x
+    watchdog library (pip install watchdog)
 
-    Processes all existing files in the Downloads folder.
-    Moves files to appropriate folders based on extensions or specific naming rules.
+Usage:
 
-Folder Structure
+    Set the paths for the target folders in the script:
 
-Before running the scripts, ensure the following folders exist:
-
-/home/window/Downloads/               # Source folder for tracking files.
-/home/window/Documents/ViberDownloads/ # Destination for Viber-specific files.
-/home/window/Music/                   # Destination for music files.
-/home/window/Pictures/                # Destination for image files.
-/home/window/Videos/                  # Destination for video files.
-/home/window/Documents/Mountcare/     # Destination for Mountcare-related files.
-/home/window/Documents/Pdf/           # Destination for PDF files.
-
-Script Details
-1. Real-Time File Monitoring
-
-    File: watchdog_file_handler.py
-    Description:
-        Uses the watchdog library to detect newly created files in the Downloads folder.
-        Moves files to corresponding folders based on their extensions.
-    Key Methods:
-        determine_destination: Identifies the destination folder for a file based on its extension.
-        on_created: Handles the event triggered when a new file is created.
-
-2. Batch File Processing
-
-    File: batch_file_processor.py
-    Description:
-        Processes all files in the Downloads folder and organizes them into predefined destinations.
-    Key Function:
-        MoveDocument: Scans files in the folder and moves them based on extensions or specific naming conventions.
-
-Supported File Types
-Type	Extensions	Destination
-Images	.jpg, .jpeg, .png, .gif, .bmp	/home/window/Pictures/
-Videos	.mp4, .mkv, .avi, .mov, .wmv, etc.	/home/window/Videos/
-Music	.mp3, .wav, .flac, .aac	/home/window/Music/
-Documents	.doc, .docx, .ppt, .pptx, .xls, etc.	/home/window/Documents/
-PDFs	.pdf	/home/window/Documents/Pdf/
-Viber Files	Files named "Mountcare" or variations	/home/window/Documents/Mountcare/
-How to Run
-1. Real-Time File Monitoring
-
-    Install dependencies:
-
-pip install watchdog
+Downloads = "/home/window/Downloads/"
+Pictures = "/home/window/Pictures/"
+Video = "/home/window/Videos/"
 
 Run the script:
 
-    python watchdog_file_handler.py
+    python file_organizer_watchdog.py
 
-    The script will start monitoring Downloads and organizing files as they are added.
+    Any new file added to the monitored directory (Downloads) will be moved to the appropriate folder.
 
-2. Batch File Processing
+2. Manual File Organizer
 
-    Run the script:
+Description:
+This script scans a directory and manually organizes files by moving them to specific folders based on their extensions. It includes support for custom rules such as handling specific folder names or unique file types.
+Features:
 
-    python batch_file_processor.py
+    Scans a directory and moves files to their respective folders.
+    Supports a wide range of file types, including videos, images, PDFs, and more.
+    Allows custom logic for specific files or folders.
 
-    The script will process all existing files in Downloads and move them to their appropriate destinations.
-
-Customization
-
-    Update the paths in the script to match your folder structure.
-    Modify the determine_destination method or MoveDocument function to support additional file types or custom rules.
-
-Example Logs
-Real-Time Monitoring:
-
-Moved: file.mp4 to /home/window/Videos/
-Moved: image.jpg to /home/window/Pictures/
-
-Batch Processing:
-
-Moved file ('file', '.mp4')
-Moved file ('image', '.jpg')
-
-Dependencies
+Requirements:
 
     Python 3.x
-    Libraries:
-        watchdog: For real-time monitoring.
-        os, shutil: For file operations.
+    shutil library (included by default in Python)
 
-Install the required dependencies using:
+Usage:
 
-pip install watchdog
+    Update the paths and custom rules in the script:
+
+Downloads = "/home/window/Downloads/"
+Music = "/home/window/Music/"
+
+Run the script:
+
+    python file_organizer_manual.py
+
+    Files in the specified directory will be moved to their respective folders.
+
+Folder Structure
+
+Below is the default folder structure used by the scripts. You can customize these paths in the code:
+
+/home/window/
+├── Downloads/
+├── Documents/
+│   ├── Pdf/
+│   ├── Mountcare/
+│   └── ViberDownloads/
+├── Music/
+├── Pictures/
+├── Videos/
 
 Notes
 
-    Ensure destination folders exist before running the script to avoid errors.
-    Only files are handled; directories are ignored.
-    Both scripts can be further enhanced to meet specific needs.
+    These scripts are designed for personal use on Linux systems (e.g., Arch Linux with Hyprland).
+    Ensure that folder paths exist or modify the code to create them automatically.
+    For large directories, running the manual script periodically may be more efficient than using real-time monitoring.
+
