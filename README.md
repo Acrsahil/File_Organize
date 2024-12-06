@@ -21,4 +21,4 @@ The *Watchdog File Organizer* uses the `watchdog` library to monitor a directory
 ### **Usage**  
 1. Clone this repository:
    ```bash
-   git clone https://github.com/<your-repo-name>
+   git clone https://github.com/Acrsahil/File_Organize
