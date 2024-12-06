@@ -1,4 +1,4 @@
-File Organizer using Python
+## File Organizer using Python
 
 This project automates the organization of files in the Downloads folder based on their file types or names. It provides two solutions:
 
